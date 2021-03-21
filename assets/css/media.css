@@ -1,0 +1,19 @@
+/*  
+ *   App CSS - Media Queries
+ *   By Nicollas Feitosa
+ */
+
+/* Celular */
+@media (min-width: 360px) and (max-width: 767.98px) {
+
+}
+
+/* Tablet MD */
+@media (min-width: 767.99px) and (max-width: 991.98px) {
+
+}
+
+/* Para monitores 900p ou 1080p acima de 1366x768*/
+@media (min-width: 1399.98px) {
+
+}
