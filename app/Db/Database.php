@@ -5,7 +5,8 @@ namespace NicollasDev\Db;
 use \PDO;
 use \PDOException;
 
-class Database {
+class Database 
+{
     const HOST = 'localhost';
     const DBNAME = 'dev_vagas';
     const USER = 'root';

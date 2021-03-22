@@ -75,6 +75,17 @@ class Vaga {
     {
         return (new Database('vagas'))->select('id = '.$id)->fetchObject(self::class);
     }
+    
+    /**
+     * Calcula a quantidade de Vagas
+     *
+     * @param string $where
+     * @return integer
+     */
+    public static function getQuantidadeVagas($where = null)
+    {
+        return (new Database('vagas'))->select($where, null, null, 'COUNT(*) as quantidade')->fetchObject()->quantidade;
+    }
 
     /**
      * Método responsável por cadastrar uma nova vaga no banco

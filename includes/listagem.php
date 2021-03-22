@@ -39,6 +39,24 @@
     }
 
     $resultados = strlen($resultados) ? $resultados : '<tr><td colspan="6" class="text-center">Nenhuma vaga encontrada!</td></tr>';
+
+    // Paginação
+
+    unset($_GET['status']);
+    unset($_GET['pagina']);
+    $gets = http_build_query($_GET); // Retorna o padrão de URL
+
+    $paginacao = '';
+    $paginas = $pagination->getPages();
+
+    foreach($paginas as $key => $pagina){
+
+        $class = $pagina['atual'] ? 'btn-primary' : 'btn-light';
+
+        $paginacao .= '<a class="btn '.$class.' mx-1" href="?pagina='.$pagina['pagina'].'&'.$gets.'">'.$pagina['pagina'].'</a>';
+    }
+
+    $paginacao = '<span>Pagina: <span>' . $paginacao;
 ?>
 
 <main>
@@ -53,8 +71,16 @@
         <form method="get">
             <div class="row my-4">
                 <div class="col">
-                    <label for="">Buscar por título</label>
-                    <input type="text" name="busca" class="form-control">
+                    <label>Buscar por título</label>
+                    <input type="text" name="busca" class="form-control" value="<?=$busca?>">
+                </div>
+                <div class="col">
+                    <label>Status</label>
+                    <select name="filtroStatus" class="form-control">
+                        <option value="">Ativo/Inativa</option>
+                        <option value="s" <?= $filtroStatus == 's' ? 'selected' : '' ?>>Ativo</option>
+                        <option value="n" <?= $filtroStatus == 'n' ? 'selected' : '' ?>>Inativo</option>
+                    </select>
                 </div>
                 <div class="col d-flex align-items-end">
                     <button type="submit" class="btn btn-primary">Filtrar</button>
@@ -77,5 +103,9 @@
                 <?= $resultados ?>
             </tbody>
         </table>
+    </section>
+
+    <section>
+        <?=$paginacao?>
     </section>
 </main>
